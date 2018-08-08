@@ -37,12 +37,24 @@ namespace KKL
 
         public ConfigNode Load(Window window)
         {
-            return _config.GetNode(MODID).GetNode("WINDOW").GetNode(window.Key);
+            var k = window.Name.ToUpper();
+            var w = _config.GetNode(MODID).GetNode("WINDOW");
+            
+            if (w.HasNode(k)) return w.GetNode(k);
+            
+            var n = new ConfigNode(k);
+            
+            n.SetValue("id", 0);
+            n.SetValue("x", 100);
+            n.SetValue("y", 100);
+            w.AddNode(n);
+            
+            return n;
         }
 
         public void Save(Window window)
         {
-            _config.GetNode(MODID).GetNode("WINDOW").SetNode(window.Key, window.Config);
+            _config.GetNode(MODID).GetNode("WINDOW").SetNode(window.Name.ToUpper(), window.Config);
             _config.Save(User);
         }
     }

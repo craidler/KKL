@@ -4,7 +4,7 @@ namespace KKL.UI
 {
     public class Orbit : Window
     {
-        public Orbit() : base("ORBIT")
+        public Orbit()
         {
             Scenes = new List<GameScenes>
             {

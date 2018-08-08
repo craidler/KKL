@@ -4,7 +4,7 @@ namespace KKL.UI
 {
     public class Manifest : Window
     {
-        public Manifest() : base("MANIFEST")
+        public Manifest()
         {
             Scenes = new List<GameScenes>
             {

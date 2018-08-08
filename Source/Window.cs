@@ -8,7 +8,7 @@ namespace KKL
     {
         private void Awake()
         {
-            foreach (var w in Window.Windows) Debug.Log("[" + Setting.MODID + "] Window " + w.Key + " loaded");
+            foreach (var w in Window.Windows) Debug.Log("[" + Setting.MODID + "] Window " + w.Name + " loaded");
         }
 
         private void Start()
@@ -39,7 +39,10 @@ namespace KKL
             }
         }
         
-        protected internal readonly string Key;
+        protected internal string Name
+        {
+            get { return GetType().Name; }
+        }
 
         protected internal bool Show
         {
@@ -55,11 +58,6 @@ namespace KKL
                 Config.SetValue("show", value);
                 Setting.Instance.Save(this);
             }
-        }
-
-        protected internal string Title
-        {
-            get { return Config.GetValue("title"); }
         }
 
         protected internal bool Allow
@@ -95,14 +93,12 @@ namespace KKL
 
         private bool _visible;
 
-        protected Window(string key)
+        protected Window()
         {
-            Key = key;
-            
-            GameEvents.onGameSceneLoadRequested.Add(OnSceneLoad);
-            GameEvents.onLevelWasLoadedGUIReady.Add(OnSceneReady);
-            GameEvents.onHideUI.Add(OnHide);
-            GameEvents.onShowUI.Add(OnShow);
+            GameEvents.onGameSceneLoadRequested.Add(scene => { _visible = false; });
+            GameEvents.onLevelWasLoadedGUIReady.Add(scene => { _visible = true; });
+            GameEvents.onHideUI.Add(() => { _visible = false; });
+            GameEvents.onShowUI.Add(() => { _visible = true; });
         }
 
         private void Draw(int id)
@@ -140,7 +136,7 @@ namespace KKL
                 Area = a;
             }
             
-            Area = GUILayout.Window(int.Parse(Config.GetValue("id")), Area, Draw, Title);
+            Area = GUILayout.Window(int.Parse(Config.GetValue("id")), Area, Draw, Name);
         }
 
         private void OnClose()
@@ -151,26 +147,6 @@ namespace KKL
         private void OnOpen()
         {
             Show = true;
-        }
-
-        private void OnHide()
-        {
-            _visible = false;
-        }
-
-        private void OnShow()
-        {
-            _visible = true;
-        }
-
-        private void OnSceneLoad(GameScenes scene)
-        {
-            _visible = false;
-        }
-
-        private void OnSceneReady(GameScenes scene)
-        {
-            _visible = true;
         }
     }
 }

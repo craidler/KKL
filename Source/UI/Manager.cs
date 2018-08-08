@@ -5,7 +5,7 @@ namespace KKL.UI
 {
     public class Manager : Window
     {
-        public Manager() : base("MANAGER")
+        public Manager()
         {
             Scenes = new List<GameScenes>{
                 GameScenes.EDITOR,
@@ -17,10 +17,10 @@ namespace KKL.UI
         {
             GUILayout.BeginVertical();
 
-            foreach (var window in Windows)
+            foreach (var w in Windows)
             {
-                if (window.Equals(this) || !window.Allow) continue;
-                window.Show = GUILayout.Toggle(window.Show, window.Title);
+                if (w.Equals(this) || !w.Allow) continue;
+                w.Show = GUILayout.Toggle(w.Show, w.Name);
             }
             
             GUILayout.EndVertical();

@@ -29,7 +29,7 @@ namespace KKL.UI
             set { if (Grid != value) Ui.SetValue("grid", value); }
         }
         
-        public Setting() : base("SETTING")
+        public Setting()
         {
             Scenes = new List<GameScenes>
             {

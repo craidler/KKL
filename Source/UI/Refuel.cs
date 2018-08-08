@@ -4,7 +4,7 @@ namespace KKL.UI
 {
     public class Refuel : Window
     {
-        public Refuel() : base("REFUEL")
+        public Refuel()
         {
             Scenes = new List<GameScenes>
             {
