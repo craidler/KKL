@@ -17,6 +17,7 @@ namespace KKL.UI
         {
             var vessel = EditorLogic.RootPart.vessel;
             
+            Util.Columns(new List<string>{ "Parameter", "Value" });
             Util.Table(new Dictionary<string, string>
             {
                 { "Crew", string.Format("{0:0}/{1:0}", vessel.GetCrewCount(), vessel.GetCrewCapacity())},

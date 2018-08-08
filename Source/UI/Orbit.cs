@@ -15,7 +15,8 @@ namespace KKL.UI
         protected override void DrawContent()
         {
             var orbit = FlightGlobals.ActiveVessel.GetOrbit();
-            
+
+            Util.Columns(new List<string>{ "Parameter", "Value" });
             Util.Table(new Dictionary<string, string>
             {
                 { "ApA", string.Format("{0:F3} km", orbit.ApA / 1000) },

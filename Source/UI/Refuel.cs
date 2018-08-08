@@ -14,18 +14,19 @@ namespace KKL.UI
 
         protected override void DrawContent()
         {
-            var resources = new Dictionary<string, string>();
+            var resources = new Dictionary<string, double>();
             var vessel = FlightGlobals.ActiveVessel;
 
             foreach (var p in vessel.Parts)
             {
                 foreach (var r in p.Resources)
                 {
-                    if (!resources.ContainsKey(r.resourceName)) resources.Add(r.resourceName, "0");
-                    resources[r.resourceName] = string.Format("{0:F3}", float.Parse(resources[r.resourceName]) + r.maxAmount - r.amount);
+                    if (!resources.ContainsKey(r.resourceName)) resources.Add(r.resourceName, 0);
+                    resources[r.resourceName] += r.maxAmount - r.amount;
                 }
             }
             
+            Util.Columns(new List<string>{ "Resource", "Amount" });
             Util.Table(resources);
         }
     }
