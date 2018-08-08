@@ -48,17 +48,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Launchpad.cs" />
-    <Compile Include="Flight.cs" />
-    <Compile Include="Setting.cs" />
-    <Compile Include="Util.cs" />
-    <Compile Include="UI\Manifest.cs" />
-    <Compile Include="UI\Orbit.cs" />
-    <Compile Include="UI\Refuel.cs" />
-    <Compile Include="UI\Setting.cs" />
-    <Compile Include="Window.cs" />
+    <Compile Include="Source\Flight.cs" />
+    <Compile Include="Source\Launchpad.cs" />
+    <Compile Include="Source\Setting.cs" />
+    <Compile Include="Source\UI\Manager.cs" />
+    <Compile Include="Source\UI\Manifest.cs" />
+    <Compile Include="Source\UI\Orbit.cs" />
+    <Compile Include="Source\UI\Refuel.cs" />
+    <Compile Include="Source\UI\Setting.cs" />
+    <Compile Include="Source\Util.cs" />
+    <Compile Include="Source\Window.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\Manager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="GameData\KKL\Patches\Camera.cfg" />
