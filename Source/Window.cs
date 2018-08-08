@@ -35,6 +35,7 @@ namespace KKL
                     new UI.Orbit(),
                     new UI.Refuel(),
                     new UI.Setting(),
+                    new UI.Staging(),
                 };
             }
         }

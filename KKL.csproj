@@ -56,6 +56,7 @@
     <Compile Include="Source\UI\Orbit.cs" />
     <Compile Include="Source\UI\Refuel.cs" />
     <Compile Include="Source\UI\Setting.cs" />
+    <Compile Include="Source\UI\Staging.cs" />
     <Compile Include="Source\Util.cs" />
     <Compile Include="Source\Window.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
