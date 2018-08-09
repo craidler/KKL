@@ -1,4 +1,4 @@
-﻿namespace KKL
+﻿namespace KKL.UI
 {
     public class Flight
     {

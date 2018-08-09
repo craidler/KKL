@@ -14,10 +14,9 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>obj\Debug\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>C:\Kerbal Space Program\1.4.5-vanilla\GameData\KKL\Plugins</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -34,30 +33,30 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\Kerbal Space Program\1.4.5\KSP_x64_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\..\Kerbal Space Program\1.4.5\KSP_x64_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\..\..\..\Kerbal Space Program\1.4.5\KSP_x64_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Flight.cs" />
-    <Compile Include="Source\Launchpad.cs" />
     <Compile Include="Source\Setting.cs" />
+    <Compile Include="Source\UI\Flight.cs" />
+    <Compile Include="Source\UI\Launchpad.cs" />
     <Compile Include="Source\UI\Manager.cs" />
     <Compile Include="Source\UI\Manifest.cs" />
     <Compile Include="Source\UI\Orbit.cs" />
     <Compile Include="Source\UI\Refuel.cs" />
     <Compile Include="Source\UI\Setting.cs" />
+    <Compile Include="Source\UI\Window.cs" />
     <Compile Include="Source\Util.cs" />
-    <Compile Include="Source\Window.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +67,7 @@
     <Content Include="GameData\KKL\Patches\Isru.cfg" />
     <Content Include="GameData\KKL\Patches\Mechjeb.cfg" />
     <Content Include="GameData\KKL\Plugins\Data\Default.cfg" />
+    <Content Include="GameData\KKL\Plugins\Icons\Launcher.png" />
     <Content Include="GameData\KKL\Plugins\KKL.dll" />
     <Content Include="KKL.netkan" />
   </ItemGroup>

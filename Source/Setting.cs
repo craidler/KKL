@@ -1,61 +1,58 @@
 ﻿using System.IO;
+using UnityEngine;
 
 namespace KKL
 {
-    public class Setting
+    public static class Setting
     {
         // ReSharper disable once InconsistentNaming
-        // ReSharper disable once MemberCanBePrivate.Global
         public const string MODID = "KKL";
         
-        private const string Default = "Data/Default.cfg";
-        private const string User = "Data/User.cfg";
+        private static readonly string Default = Path + "/Plugins/Data/Default.cfg";
+        private static readonly string User = Path + "/Plugins/Data/User.cfg";
         
-        private static Setting _instance;
-        
-        public static Setting Instance
+        private static ConfigNode _config;
+
+        private static ConfigNode Config
         {
             get
             {
-                if (null != _instance) return _instance;
+                if (_config != null) return _config;
                 if (!File.Exists(User)) File.Copy(Default, User);
-                return _instance = new Setting(User);
+                return _config = ConfigNode.Load(User);
             }
         }
-        
-        private readonly ConfigNode _config;
 
-        private Setting(string path)
+        public static string Path
         {
-            _config = ConfigNode.Load(path);
+            get { return Application.dataPath + "/../GameData/" + MODID; }
         }
         
-        public ConfigNode Load(string key)
+        public static ConfigNode Load(string key)
         {
-            return _config.GetNode(MODID).GetNode(key);
+            return Config.GetNode(MODID).GetNode(key);
         }
 
-        public ConfigNode Load(Window window)
+        public static ConfigNode Load(UI.Window window)
         {
-            var k = window.Name.ToUpper();
-            var w = _config.GetNode(MODID).GetNode("WINDOW");
+            var w = Load("WINDOW");
             
-            if (w.HasNode(k)) return w.GetNode(k);
+            if (w.HasNode(window.Key)) return w.GetNode(window.Key);
             
-            var n = new ConfigNode(k);
+            var n = new ConfigNode(window.Key);
             
-            n.SetValue("id", 0);
-            n.SetValue("x", 100);
-            n.SetValue("y", 100);
+            n.SetValue("show", true, true);
+            n.SetValue("x", 100, true);
+            n.SetValue("y", 100, true);
+            
             w.AddNode(n);
             
             return n;
         }
 
-        public void Save(Window window)
+        public static void Save()
         {
-            _config.GetNode(MODID).GetNode("WINDOW").SetNode(window.Name.ToUpper(), window.Config);
-            _config.Save(User);
+            Config.Save(User);
         }
     }
 }

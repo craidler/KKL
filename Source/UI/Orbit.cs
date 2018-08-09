@@ -6,17 +6,15 @@ namespace KKL.UI
     {
         public Orbit()
         {
-            Scenes = new List<GameScenes>
-            {
-                GameScenes.FLIGHT,
-            };
+            Id = 6665;
+            Scenes = new List<GameScenes> { GameScenes.FLIGHT };
         }
 
         protected override void DrawContent()
         {
             var orbit = FlightGlobals.ActiveVessel.GetOrbit();
 
-            Util.Columns(new List<string>{ "Parameter", "Value" });
+            Util.Columns(new [] { "Parameter", "Value" });
             Util.Table(new Dictionary<string, string>
             {
                 { "ApA", string.Format("{0:F3} km", orbit.ApA / 1000) },

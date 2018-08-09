@@ -6,18 +6,15 @@ namespace KKL.UI
     {
         public Manifest()
         {
-            Scenes = new List<GameScenes>
-            {
-                GameScenes.EDITOR,
-                GameScenes.FLIGHT,
-            };
+            Id = 6664;
+            Scenes = new List<GameScenes> { GameScenes.EDITOR, GameScenes.FLIGHT };
         }
 
         protected override void DrawContent()
         {
             var vessel = EditorLogic.RootPart.vessel;
             
-            Util.Columns(new List<string>{ "Parameter", "Value" });
+            Util.Columns(new[] { "Parameter", "Value" });
             Util.Table(new Dictionary<string, string>
             {
                 { "Crew", string.Format("{0:0}/{1:0}", vessel.GetCrewCount(), vessel.GetCrewCapacity())},

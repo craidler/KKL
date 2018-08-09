@@ -7,10 +7,8 @@ namespace KKL.UI
     {
         public Manager()
         {
-            Scenes = new List<GameScenes>{
-                GameScenes.EDITOR,
-                GameScenes.FLIGHT,
-            };
+            Id = 6660;
+            Scenes = new List<GameScenes> { GameScenes.EDITOR, GameScenes.FLIGHT };
         }
 
         protected override void DrawContent()
@@ -19,7 +17,7 @@ namespace KKL.UI
 
             foreach (var w in Windows)
             {
-                if (w.Equals(this) || !w.Allow) continue;
+                if (w.Key == Key || !w.Allow) continue;
                 w.Show = GUILayout.Toggle(w.Show, w.Name);
             }
             

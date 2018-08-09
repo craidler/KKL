@@ -43,5 +43,15 @@ namespace KKL
             
             GUILayout.EndHorizontal();
         }
+
+        public static void Log(object o, string message)
+        {
+            Debug.Log("[" + Setting.MODID + "] " + o.GetType().Name + " " + message);
+        }
+
+        public static void Message(string message, float duration = 2f, ScreenMessageStyle style = ScreenMessageStyle.UPPER_CENTER)
+        {
+            ScreenMessages.PostScreenMessage(new ScreenMessage(message, duration, style));
+        }
     }
 }

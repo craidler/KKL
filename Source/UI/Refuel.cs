@@ -6,10 +6,9 @@ namespace KKL.UI
     {
         public Refuel()
         {
-            Scenes = new List<GameScenes>
-            {
-                GameScenes.FLIGHT,
-            };
+            Id = 6666;
+            Size = new[] {300f, 100f};
+            Scenes = new List<GameScenes> { GameScenes.FLIGHT };
         }
 
         protected override void DrawContent()
@@ -26,7 +25,7 @@ namespace KKL.UI
                 }
             }
             
-            Util.Columns(new List<string>{ "Resource", "Amount" });
+            Util.Columns(new [] { "Resource", "Amount" });
             Util.Table(resources);
         }
     }
