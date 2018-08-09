@@ -2,34 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace KKL.UI
 {
     public class Setting : Window
     {
         private static byte Alpha
         {
-            get { return byte.Parse(Ui.GetValue("alpha")); }
-            set { Ui.SetValue("alpha", value); }
+            get { return byte.Parse(Setting.Ui.GetValue("alpha")); }
+            set { Setting.Ui.SetValue("alpha", value); }
         }
 
         private static byte Tint
         {
-            get { return byte.Parse(Ui.GetValue("tint")); }
-            set { Ui.SetValue("tint", value); }
+            get { return byte.Parse(Setting.Ui.GetValue("tint")); }
+            set { Setting.Ui.SetValue("tint", value); }
         }
         
         private static byte Grid
         {
-            get { return byte.Parse(Ui.GetValue("grid")); }   
+            get { return byte.Parse(Setting.Ui.GetValue("grid")); }   
             // ReSharper disable once PossibleLossOfFraction
-            set { Ui.SetValue("grid", Math.Floor((decimal) (value / 10)) * 10); }   
+            set { Setting.Ui.SetValue("grid", Math.Floor(value / 10f) * 10); }   
         }
         
         private static bool Snap
         {
-            get { return bool.Parse(Ui.GetValue("snap")); }   
-            set { Ui.SetValue("snap", value); }   
+            get { return bool.Parse(Setting.Ui.GetValue("snap")); }   
+            set { Setting.Ui.SetValue("snap", value); }   
         }
 
         public Setting()
@@ -52,7 +51,7 @@ namespace KKL.UI
             GUILayout.Label("Alpha [" + Tint + "]");
             Alpha = (byte) Math.Floor(GUILayout.HorizontalSlider(Alpha, byte.MinValue, byte.MaxValue));
             
-            if (GUILayout.Button("save")) KKL.Setting.Save();
+            if (GUILayout.Button("save")) Setting.Save();
             
             GUILayout.EndVertical();
         }

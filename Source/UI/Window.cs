@@ -4,48 +4,57 @@ using System.IO;
 using KSP.UI.Screens;
 using UnityEngine;
 
+// ReSharper disable InconsistentNaming
+// ReSharper disable MemberCanBePrivate.Global
+
 namespace KKL.UI
 {
     [KSPAddon(KSPAddon.Startup.FlightAndEditor, true)]
     public class Windows : MonoBehaviour
     {
+        public static Texture2D Button
+        {
+            get
+            {
+                var texture = new Texture2D(0, 0);
+                texture.LoadImage(File.ReadAllBytes(Window.Setting.Path + "/Plugins/Icons/Launcher.png"));
+                return texture;
+            }
+        }
+        
         private ApplicationLauncherButton _launcher;
         
         private void Awake()
         {
-            Util.Log(this, "Awake");
-            foreach (var w in Window.Windows) Util.Log(w, "awoke");
+            Util.Log(this, string.Format("Awake {0:0} windows", Window.Windows.Count));
         }
 
         private void Start()
         {
             Util.Log(this, "Start");
+            
             DontDestroyOnLoad(this);
-            GameEvents.onGUIApplicationLauncherReady.Add(OnLauncherReady);
+            
+            GameEvents.onGUIApplicationLauncherReady.Add(() =>
+            {
+                if (_launcher) return;
+
+                _launcher = ApplicationLauncher.Instance.AddModApplication(
+                    () => Window.Manager.Open(),
+                    () => Window.Manager.Close(),
+                    null,
+                    null,
+                    null,
+                    null,
+                    ApplicationLauncher.AppScenes.VAB | ApplicationLauncher.AppScenes.FLIGHT,
+                    Button
+                );
+            });
         }
 
         private void OnGUI()
         {
             foreach (var w in Window.Windows) w.OnGUI();
-        }
-
-        private void OnLauncherReady()
-        {
-            if (_launcher) return;
-
-            var texture = new Texture2D(0, 0);
-            texture.LoadImage(File.ReadAllBytes(KKL.Setting.Path + "/Plugins/Icons/Launcher.png"));
-
-            _launcher = ApplicationLauncher.Instance.AddModApplication(
-                () => Window.Manager.Open(),
-                () => Window.Manager.Close(),
-                null,
-                null,
-                null,
-                null,
-                ApplicationLauncher.AppScenes.VAB | ApplicationLauncher.AppScenes.FLIGHT,
-                texture
-            );
         }
     }
     
@@ -61,11 +70,6 @@ namespace KKL.UI
             new Setting(),
         };
 
-        protected static ConfigNode Ui
-        {
-            get { return KKL.Setting.Load("UI"); }
-        }
-
         public static Window Manager
         {
             get
@@ -75,7 +79,10 @@ namespace KKL.UI
             }
         }
 
-        protected int Id = 0;
+        protected internal static KKL.Setting Setting
+        {
+            get { return KKL.Setting.Instance; }
+        }
 
         protected internal string Key
         {
@@ -94,19 +101,20 @@ namespace KKL.UI
             {
                 if (Show == value) return;
                 Config.SetValue("show", value, true);
-                Config.SetValue("x", _area.x);
-                Config.SetValue("y", _area.y);
-                KKL.Setting.Save();
+                Config.SetValue("x", Area.x);
+                Config.SetValue("y", Area.y);
+                Setting.Save();
             }
         }
         
-        // ReSharper disable once MemberCanBePrivate.Global
         protected internal bool Visible { get; set; }
 
         protected internal bool Allow
         {
             get { return Scenes.Contains(HighLogic.LoadedScene); }   
         }
+
+        protected int Id = 0;
 
         protected ConfigNode Data
         {
@@ -116,28 +124,29 @@ namespace KKL.UI
         protected readonly ConfigNode Config;
         protected float[] Size = { 200f, 100f };
         protected List<GameScenes> Scenes;
-        
-        private Rect _area;
+        protected Rect Area;
 
         protected Window()
         {
+            // Load config of window
+            Config = Setting.Load(this);
+            
+            // Initialize area of window
+            Area.x = float.Parse(Config.GetValue("x"));
+            Area.y = float.Parse(Config.GetValue("y"));
+            Area.width = Size[0];
+            Area.height = Size[1];
+
+            // React on some game events
             GameEvents.onGameSceneLoadRequested.Add(scene => { Visible = false; });
             GameEvents.onLevelWasLoadedGUIReady.Add(scene => { Visible = true; });
             GameEvents.onHideUI.Add(() => { Visible = false; });
             GameEvents.onShowUI.Add(() => { Visible = true; });
-            
-            Config = KKL.Setting.Load(this);
-            
-            _area.x = float.Parse(Config.GetValue("x"));
-            _area.y = float.Parse(Config.GetValue("y"));
-            _area.width = Size[0];
-            _area.height = Size[1];
         }
 
         private void Draw(int id)
         {
-            GUI.DragWindow(new Rect(0, 0, _area.width - 20, 20));
-            
+            GUI.DragWindow(new Rect(0, 0, Area.width - 20, 20));
             DrawContent();
         }
 
@@ -145,28 +154,28 @@ namespace KKL.UI
         {
         }
 
-        // ReSharper disable once InconsistentNaming
         public void OnGUI()
         {
             try
             {
+                // Dont render anything
                 if (!Allow || !Show || !Visible) return;
             
                 // Snap to grid
-                if (bool.Parse(Ui.GetValue("snap")))
+                if (bool.Parse(Setting.Ui.GetValue("snap")))
                 {
-                    var s = float.Parse(Ui.GetValue("grid"));
-                    _area.x = (float) Math.Floor(_area.x / s) * s;
-                    _area.y = (float) Math.Floor(_area.y / s) * s;
+                    var s = float.Parse(Setting.Ui.GetValue("grid"));
+                    Area.x = (float) Math.Floor(Area.x / s) * s;
+                    Area.y = (float) Math.Floor(Area.y / s) * s;
                 }
                 
                 // Stick within screen
-                if (_area.x < 0) _area.x = 0;
-                if (_area.y < 0) _area.y = 0;
-                if (_area.x + _area.width > Screen.width) _area.x = Screen.width - _area.width;
-                if (_area.y + _area.height > Screen.height) _area.y = Screen.height - _area.height;
+                if (Area.x < 0) Area.x = 0;
+                if (Area.y < 0) Area.y = 0;
+                if (Area.x + Area.width > Screen.width) Area.x = Screen.width - Area.width;
+                if (Area.y + Area.height > Screen.height) Area.y = Screen.height - Area.height;
             
-                _area = GUILayout.Window(Id, _area, Draw, Name);
+                Area = GUILayout.Window(Id, Area, Draw, Name);
             }
             catch (Exception e)
             {

@@ -1,41 +1,51 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace KKL
 {
-    public static class Setting
+    public class Setting
     {
         // ReSharper disable once InconsistentNaming
         public const string MODID = "KKL";
-        
-        private static readonly string Default = Path + "/Plugins/Data/Default.cfg";
-        private static readonly string User = Path + "/Plugins/Data/User.cfg";
-        
-        private static ConfigNode _config;
 
-        private static ConfigNode Config
-        {
-            get
-            {
-                if (_config != null) return _config;
-                if (!File.Exists(User)) File.Copy(Default, User);
-                return _config = ConfigNode.Load(User);
-            }
-        }
+        public static readonly Setting Instance = new Setting();
 
-        public static string Path
+        public string Path
         {
             get { return Application.dataPath + "/../GameData/" + MODID; }
         }
         
-        public static ConfigNode Load(string key)
+        public ConfigNode Ui
         {
-            return Config.GetNode(MODID).GetNode(key);
+            get { return Config.GetNode(MODID).GetNode("UI"); }
         }
 
-        public static ConfigNode Load(UI.Window window)
+        private ConfigNode Config
         {
-            var w = Load("WINDOW");
+            get
+            {
+                if (_config != null) return _config;
+                if (!File.Exists(_files["user"])) File.Copy(_files["default"], _files["user"]);
+                return _config = ConfigNode.Load(_files["user"]);
+            }
+        }
+
+        private readonly Dictionary<string, string> _files;
+        private ConfigNode _config;
+
+        private Setting()
+        {
+            _files = new Dictionary<string, string>
+            {
+                { "default", Path + "/Plugins/Data/Default.cfg" },
+                { "user", Path + "/Plugins/Data/User.cfg" }
+            };
+        }
+
+        public ConfigNode Load(UI.Window window)
+        {
+            var w = Config.GetNode(MODID).GetNode("WINDOW");
             
             if (w.HasNode(window.Key)) return w.GetNode(window.Key);
             
@@ -50,9 +60,9 @@ namespace KKL
             return n;
         }
 
-        public static void Save()
+        public void Save()
         {
-            Config.Save(User);
+            Config.Save(_files["user"]);
         }
     }
 }
