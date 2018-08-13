@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace KKL.UI
 {
-    [KSPAddon(KSPAddon.Startup.FlightAndEditor, true)]
+    // [KSPAddon(KSPAddon.Startup.FlightAndEditor, true)]
     public class Windows : MonoBehaviour
     {
         public static Texture2D Button

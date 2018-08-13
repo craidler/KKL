@@ -16,7 +16,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>C:\Kerbal Space Program\1.4.5-vanilla\GameData\KKL\Plugins</OutputPath>
+    <OutputPath>obj\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +26,6 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>obj\Release\</OutputPath>
-    <OutputPath>GameData\KKL\Plugins\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -47,6 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Module\KKLModuleJettisonResource.cs" />
+    <Compile Include="Source\Module\KKLModuleJettisonLf.cs" />
+    <Compile Include="Source\Module\KKLModuleJettisonOx.cs" />
     <Compile Include="Source\Setting.cs" />
     <Compile Include="Source\UI\Flight.cs" />
     <Compile Include="Source\UI\Launchpad.cs" />
@@ -66,6 +68,7 @@
     <Content Include="GameData\KKL\Patches\Fairing.cfg" />
     <Content Include="GameData\KKL\Patches\Isru.cfg" />
     <Content Include="GameData\KKL\Patches\Mechjeb.cfg" />
+    <Content Include="GameData\KKL\Patches\Tank.cfg" />
     <Content Include="GameData\KKL\Plugins\Data\Default.cfg" />
     <Content Include="GameData\KKL\Plugins\Icons\Launcher.png" />
     <Content Include="GameData\KKL\Plugins\KKL.dll" />
