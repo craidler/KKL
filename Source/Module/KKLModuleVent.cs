@@ -4,13 +4,13 @@ using UnityEngine;
 namespace KKL
 {
     // ReSharper disable once InconsistentNaming
-    public class KKLModuleDump : PartModule
+    public class KKLModuleVent : PartModule
     {
-        [KSPField(isPersistant = true, guiActive = false, guiName = "Dump limit", guiFormat = "S", guiUnits = "%")]
+        [KSPField(isPersistant = true, guiActive = false, guiName = "Vent limit", guiFormat = "S", guiUnits = "%")]
         [UI_FloatEdit(scene = UI_Scene.Flight, minValue = 0f, maxValue = 100f, incrementLarge = 10f, incrementSmall = 1f, incrementSlide = 10f)]
         public float Limit;
 
-        [KSPField(guiActive = false, guiName = "Dump resource")]
+        [KSPField(guiActive = false, guiName = "Vent resource")]
         [UI_Cycle(stateNames = new []{ "All", "Lf", "Ox", "Mp", "Lf+Ox", "Lf+Ox+Mp", "Ore" })]
         public string Resource = "All";
         
@@ -26,14 +26,13 @@ namespace KKL
         };
 
         // ReSharper disable once UnusedMember.Global
-        [KSPEvent(guiActive = false, guiName = "Dump")]
-        public void Dump()
+        [KSPEvent(guiActive = false, guiName = "Vent")]
+        public void Vent()
         {
             foreach (var r in part.Resources)
             {
                 if (!_affect[Resource].Contains(r.resourceName)) continue;
                 var amount = 0d;
-                var original = r.amount;
                 if (Limit > 0) amount = r.maxAmount * Limit / 100;
                 if (r.amount <= amount) return;
                 r.amount = amount;
@@ -61,7 +60,7 @@ namespace KKL
                 if (!_affect["All"].Contains(r.resourceName) || r.amount <= 0) continue;
                 Fields["Limit"].guiActive = true;
                 Fields["Resource"].guiActive = true;
-                Events["Dump"].guiActive = true;
+                Events["Vent"].guiActive = true;
                 return;
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Contracts.Parameters;
 using Contracts.Predicates;
 using UnityEngine;
 
@@ -31,6 +32,18 @@ namespace KKL.UI
             GUILayout.EndVertical();
             GUILayout.BeginVertical();
             if (GUILayout.Button("RTRT")) Retract<ModuleDeployableAntenna>();
+            GUILayout.EndVertical();            
+            GUILayout.EndHorizontal();
+            
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginVertical();
+            GUILayout.Label("Ladders");
+            GUILayout.EndVertical();
+            GUILayout.BeginVertical();
+            if (GUILayout.Button("DPLY")) DeployLadder();
+            GUILayout.EndVertical();
+            GUILayout.BeginVertical();
+            if (GUILayout.Button("RTRT")) RetractLadder();
             GUILayout.EndVertical();            
             GUILayout.EndHorizontal();
             
@@ -71,8 +84,28 @@ namespace KKL.UI
             {
                 foreach (var m in Vessel.FindPartModulesImplementing<ModuleScienceExperiment>()) m.Events[m.experimentActionName].Invoke();
             }
-
+            
             GUILayout.EndVertical();
+        }
+        
+        private static void DeployLadder()
+        {
+            foreach (var m in Vessel.FindPartModulesImplementing<PartModule>())
+            {
+                var l = m as RetractableLadder;
+                if (!l) continue;
+                l.Events["extend"].Invoke();
+            }
+        }
+        
+        private static void RetractLadder()
+        {
+            foreach (var m in Vessel.FindPartModulesImplementing<PartModule>())
+            {
+                var l = m as RetractableLadder;
+                if (!l) continue;
+                l.Events["retract"].Invoke();
+            }
         }
 
         private static void Deploy<T>() where T : ModuleDeployablePart
