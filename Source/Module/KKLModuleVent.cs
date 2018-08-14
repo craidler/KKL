@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace KKL
 {
@@ -37,12 +36,6 @@ namespace KKL
                 if (r.amount <= amount) return;
                 r.amount = amount;
             }
-        }
-
-        public override void OnLoad(ConfigNode node)
-        {
-            base.OnLoad(node);
-            Setup();
         }
 
         public override void OnStart(StartState state)
