@@ -31,9 +31,8 @@ namespace KKL.UI
             set { Setting.Ui.SetValue("snap", value); }   
         }
 
-        public Setting()
+        public Setting(int id) : base(id)
         {
-            Id = 6661;
             Scenes = new List<GameScenes>{ GameScenes.EDITOR, GameScenes.FLIGHT };
         }
 

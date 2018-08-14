@@ -4,9 +4,8 @@ namespace KKL.UI
 {
     public class Refuel : Window
     {
-        public Refuel()
+        public Refuel(int id) : base(id)
         {
-            Id = 6666;
             Size = new[] {300f, 100f};
             Scenes = new List<GameScenes> { GameScenes.FLIGHT };
         }

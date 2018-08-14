@@ -62,12 +62,13 @@ namespace KKL.UI
     {
         public static readonly List<Window> Windows = new List<Window>
         {
-            new Launchpad(),
-            new Manager(),
-            new Manifest(),
-            new Orbit(),
-            new Refuel(),
-            new Setting(),
+            new Manager(6660),
+            new Setting(6661),
+            new Flight(6662),
+            new Launchpad(6663),
+            new Manifest(6664),
+            new Orbit(6665),
+            new Refuel(6666),
         };
 
         public static Window Manager
@@ -114,20 +115,21 @@ namespace KKL.UI
             get { return Scenes.Contains(HighLogic.LoadedScene); }   
         }
 
-        protected int Id = 0;
-
         protected ConfigNode Data
         {
             get { return Config.GetNode("DATA"); }
         }
 
+        protected readonly int Id;
         protected readonly ConfigNode Config;
         protected float[] Size = { 200f, 100f };
         protected List<GameScenes> Scenes;
         protected Rect Area;
 
-        protected Window()
+        protected Window(int id)
         {
+            Id = id;
+            
             // Load config of window
             Config = Setting.Load(this);
             

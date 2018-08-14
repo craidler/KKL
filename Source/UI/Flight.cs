@@ -11,9 +11,8 @@ namespace KKL.UI
             get { return FlightGlobals.ActiveVessel; }
         }
         
-        public Flight()
+        public Flight(int id) : base(id)
         {
-            Id = 6663;
             Scenes = new List<GameScenes>() { GameScenes.FLIGHT };
         }
 

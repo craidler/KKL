@@ -5,9 +5,8 @@ namespace KKL.UI
 {
     public class Manager : Window
     {
-        public Manager()
+        public Manager(int id) : base(id)
         {
-            Id = 6660;
             Scenes = new List<GameScenes> { GameScenes.EDITOR, GameScenes.FLIGHT };
         }
 

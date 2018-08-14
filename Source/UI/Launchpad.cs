@@ -11,9 +11,8 @@ namespace KKL.UI
             set { Data.SetValue("rigid", value); }
         }
         
-        public Launchpad()
+        public Launchpad(int id) : base(id)
         {
-            Id = 6663;
             Scenes = new List<GameScenes> { GameScenes.FLIGHT };
             
             GameEvents.onLevelWasLoadedGUIReady.Add(OnLevelLoaded);

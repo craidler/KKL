@@ -4,9 +4,8 @@ namespace KKL.UI
 {
     public class Orbit : Window
     {
-        public Orbit()
+        public Orbit(int id) : base(id)
         {
-            Id = 6665;
             Scenes = new List<GameScenes> { GameScenes.FLIGHT };
         }
 

@@ -4,9 +4,8 @@ namespace KKL.UI
 {
     public class Manifest : Window
     {
-        public Manifest()
+        public Manifest(int id) : base(id)
         {
-            Id = 6664;
             Scenes = new List<GameScenes> { GameScenes.EDITOR, GameScenes.FLIGHT };
         }
 
