@@ -64,6 +64,7 @@
     <Content Include="GameData\KKL\Patches\Camera.cfg" />
     <Content Include="GameData\KKL\Patches\Command.cfg" />
     <Content Include="GameData\KKL\Patches\Decoupler.cfg" />
+    <Content Include="GameData\KKL\Patches\Engine.cfg" />
     <Content Include="GameData\KKL\Patches\Fairing.cfg" />
     <Content Include="GameData\KKL\Patches\Isru.cfg" />
     <Content Include="GameData\KKL\Patches\Mechjeb.cfg" />
