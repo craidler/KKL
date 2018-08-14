@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Source\Module\KKLModuleJettison.cs" />
+    <Compile Include="Source\Module\KKLModuleScience.cs" />
     <Compile Include="Source\Setting.cs" />
     <Compile Include="Source\UI\Flight.cs" />
     <Compile Include="Source\UI\Launchpad.cs" />
@@ -66,7 +67,7 @@
     <Content Include="GameData\KKL\Patches\Fairing.cfg" />
     <Content Include="GameData\KKL\Patches\Isru.cfg" />
     <Content Include="GameData\KKL\Patches\Mechjeb.cfg" />
-    <Content Include="GameData\KKL\Patches\Jettison.cfg" />
+    <Content Include="GameData\KKL\Patches\Module.cfg" />
     <Content Include="GameData\KKL\Plugins\Data\Default.cfg" />
     <Content Include="GameData\KKL\Plugins\Icons\Launcher.png" />
     <Content Include="GameData\KKL\Plugins\KKL.dll" />
