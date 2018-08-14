@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace KKL
 {
     // ReSharper disable once InconsistentNaming
-    public class KKLModuleJettison : PartModule
+    public class KKLModuleDump : PartModule
     {
-        [KSPField(isPersistant = true, guiActive = false, guiName = "Jettison: Limit", guiFormat = "S", guiUnits = "%")]
+        [KSPField(isPersistant = true, guiActive = false, guiName = "Dump limit", guiFormat = "S", guiUnits = "%")]
         [UI_FloatEdit(scene = UI_Scene.Flight, minValue = 0f, maxValue = 100f, incrementLarge = 10f, incrementSmall = 1f, incrementSlide = 10f)]
         public float Limit;
 
-        [KSPField(guiActive = false, guiName = "Jettison: Resource")]
+        [KSPField(guiActive = false, guiName = "Dump resource")]
         [UI_Cycle(stateNames = new []{ "All", "Lf", "Ox", "Mp", "Lf+Ox", "Lf+Ox+Mp", "Ore" })]
         public string Resource = "All";
         
@@ -25,8 +26,8 @@ namespace KKL
         };
 
         // ReSharper disable once UnusedMember.Global
-        [KSPEvent(guiActive = false, guiName = "Jettison")]
-        public void Jettison()
+        [KSPEvent(guiActive = false, guiName = "Dump")]
+        public void Dump()
         {
             foreach (var r in part.Resources)
             {
@@ -36,8 +37,6 @@ namespace KKL
                 if (Limit > 0) amount = r.maxAmount * Limit / 100;
                 if (r.amount <= amount) return;
                 r.amount = amount;
-                
-                Util.Message("Jettisoned " + (original - amount) + " units of " + r.resourceName);
             }
         }
 
@@ -62,7 +61,7 @@ namespace KKL
                 if (!_affect["All"].Contains(r.resourceName) || r.amount <= 0) continue;
                 Fields["Limit"].guiActive = true;
                 Fields["Resource"].guiActive = true;
-                Events["Jettison"].guiActive = true;
+                Events["Dump"].guiActive = true;
                 return;
             }
         }

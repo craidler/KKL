@@ -46,7 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Module\KKLModuleJettison.cs" />
+    <Compile Include="Source\Module\KKLModuleDump.cs" />
     <Compile Include="Source\Module\KKLModuleScience.cs" />
     <Compile Include="Source\Setting.cs" />
     <Compile Include="Source\UI\Flight.cs" />
