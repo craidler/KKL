@@ -69,7 +69,6 @@
     <Content Include="GameData\KKL\Patches\ISRU.cfg" />
     <Content Include="GameData\KKL\Patches\Mechjeb.cfg" />
     <Content Include="GameData\KKL\Patches\Module.cfg" />
-    <Content Include="GameData\KKL\Patches\RCS.cfg" />
     <Content Include="GameData\KKL\Plugins\Data\Default.cfg" />
     <Content Include="GameData\KKL\Plugins\Icons\Launcher.png" />
     <Content Include="GameData\KKL\Plugins\KKL.dll" />
