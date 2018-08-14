@@ -32,23 +32,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\Kerbal Space Program\1.4.5\KSP_x64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\Kerbal Space Program\1.4.5\KSP_x64_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\Kerbal Space Program\1.4.5\KSP_x64_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Module\KKLModuleJettisonResource.cs" />
-    <Compile Include="Source\Module\KKLModuleJettisonLf.cs" />
-    <Compile Include="Source\Module\KKLModuleJettisonOx.cs" />
+    <Compile Include="Source\Module\KKLModuleJettison.cs" />
     <Compile Include="Source\Setting.cs" />
     <Compile Include="Source\UI\Flight.cs" />
     <Compile Include="Source\UI\Launchpad.cs" />
@@ -68,7 +66,7 @@
     <Content Include="GameData\KKL\Patches\Fairing.cfg" />
     <Content Include="GameData\KKL\Patches\Isru.cfg" />
     <Content Include="GameData\KKL\Patches\Mechjeb.cfg" />
-    <Content Include="GameData\KKL\Patches\Tank.cfg" />
+    <Content Include="GameData\KKL\Patches\Jettison.cfg" />
     <Content Include="GameData\KKL\Plugins\Data\Default.cfg" />
     <Content Include="GameData\KKL\Plugins\Icons\Launcher.png" />
     <Content Include="GameData\KKL\Plugins\KKL.dll" />
