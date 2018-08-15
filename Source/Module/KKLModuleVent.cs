@@ -5,11 +5,11 @@ namespace KKL
     // ReSharper disable once InconsistentNaming
     public class KKLModuleVent : PartModule
     {
-        [KSPField(isPersistant = true, guiActive = false, guiName = "Vent limit", guiFormat = "S", guiUnits = "%")]
+        [KSPField(isPersistant = true, guiActive = false, guiName = "Venting limit", guiFormat = "S", guiUnits = "%", guiActiveEditor = false)]
         [UI_FloatEdit(scene = UI_Scene.Flight, minValue = 0f, maxValue = 100f, incrementLarge = 10f, incrementSmall = 1f, incrementSlide = 10f)]
         public float Limit;
 
-        [KSPField(guiActive = false, guiName = "Vent resource")]
+        [KSPField(guiActive = false, guiActiveEditor = false, guiName = "Venting resource")]
         [UI_Cycle(stateNames = new []{ "All", "Lf", "Ox", "Mp", "Lf+Ox", "Lf+Ox+Mp", "Ore" })]
         public string Resource = "All";
         
@@ -25,7 +25,7 @@ namespace KKL
         };
 
         // ReSharper disable once UnusedMember.Global
-        [KSPEvent(guiActive = false, guiName = "Vent")]
+        [KSPEvent(guiActive = false, guiActiveEditor = false, guiName = "Vent")]
         public void Vent()
         {
             foreach (var r in part.Resources)
